@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  dir="ltr"
+  itemscope
+  itemtype="https://schema.org/WebPage"
+  prefix="og:http://ogp.me/ns#"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Approved C2S Js Goal</title>
+
+    <!-- General -->
+    <meta name="application-name" content="Approved C2S Js Goal" />
+    <meta name="author" content="Konstantin Penzin" />
+    <meta name="description" content="Approved C2S Js Goal" />
+    <meta
+      name="keywords"
+      content="C2S, Js, Goal, CPA"
+    />
+    <meta name="referrer" content="strict-origin" />
+
+
+    <script>
+    (function () {
+    var query_string = {};
+    var query = window.location.search.substring(1);
+
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (typeof query_string[pair[0]] === "undefined") {
+            query_string[pair[0]] = decodeURIComponent(pair[1]);
+        } else if (typeof query_string[pair[0]] === "string") {
+            var arr = [query_string[pair[0]], decodeURIComponent(pair[1])];
+            query_string[pair[0]] = arr;
+        } else {
+            query_string[pair[0]].push(decodeURIComponent(pair[1]));
+        }
+    }
+    var scripts = document.getElementsByTagName("script");
+
+    var filename;
+    for (var sc in scripts) {
+        if(scripts[sc].src === undefined)
+            continue;
+        if (scripts[sc].src.indexOf("core.73737.ru/pixel/") + 1) {
+            var halfname = scripts[sc].src.split("pixel/");
+            filename = halfname[1];
+        }
+    }
+    if(filename) {
+    var splitName = filename.split(".");
+    var isTr = false;
+    if(splitName[1].indexOf('?') + 1) {
+        var tr = splitName[1].split('?');
+        if(tr[1] == 'tr')
+            isTr = true;
+    }
+    var reserveStream = splitName[0];
+    if(reserveStream) {
+        var preparedData = prepareData(query_string);
+        if (query_string.s) {
+            var EmpireCookie = sendData(preparedData,reserveStream, isTr);
+            if(EmpireCookie.status == "success") {
+                setCookie('esaCookie', EmpireCookie.ec, {expires: 3600 * 24 * parseInt(EmpireCookie.postClick)});
+                if(isTr) {
+                    window.onload = function(){
+                        var links = document.getElementsByTagName('a');
+                        for(var i = 0; i < links.length; i++){
+                            if(links[i].href) {
+                                links[i].href = EmpireCookie.url+'?ec='+EmpireCookie.ec;
+                            }
+                        }
+                    }
+                }
+            } else {
+                console.log(EmpireCookie.message);
+            }
+        } else {
+            if (query_string.ec || getCookie('esaCookie')) {
+                var EmpireCookie = sendData(preparedData,reserveStream, isTr);
+                if(EmpireCookie.status == "success") {
+                    setCookie('esaCookie', EmpireCookie.ec, {expires: 3600 * 24 * parseInt(EmpireCookie.postClick)});
+                    if(isTr) {
+                        window.onload = function(){
+                            var links = document.getElementsByTagName('a');
+                            for(var i = 0; i < links.length; i++){
+                                if(links[i].href){
+                                    links[i].href = EmpireCookie.url+'?ec='+EmpireCookie.ec;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    console.log(EmpireCookie.message);
+                }
+            } else {
+                sendData(preparedData, reserveStream, isTr);
+            }
+        }
+    } else {
+       sendData(preparedData, reserveStream, isTr);
+    }
+    } else {
+        console.log("script not found")
+    }
+
+    function prepareData(query_string) {
+
+        var sub = {};
+        if (query_string.s1) sub.s1 = query_string.s1;
+        if (query_string.s2) sub.s2 = query_string.s2;
+        if (query_string.s3) sub.s3 = query_string.s3;
+        if (query_string.s4) sub.s4 = query_string.s4;
+        if (query_string.s5) sub.s5 = query_string.s5;
+        if (query_string.s6) sub.s6 = query_string.s6;
+        if (query_string.s7) sub.s7 = query_string.s7;
+        if (query_string.s8) sub.s8 = query_string.s8;
+        if (query_string.s9) sub.s9 = query_string.s9;
+        if (query_string.s10) sub.s10 = query_string.s10;
+
+        var utm = {};
+        if (query_string.utm_source) utm.utm_source = query_string.utm_source;
+        if (query_string.utm_medium) utm.utm_medium = query_string.utm_medium;
+        if (query_string.utm_term) utm.utm_term = query_string.utm_term;
+        if (query_string.utm_content) utm.utm_content = query_string.utm_content;
+        if (query_string.utm_campaign) utm.utm_campaign = query_string.utm_campaign;
+
+        var usr = {};
+        if(!query_string.s)
+            if(query_string.ec) {
+                usr.ec = query_string.ec;
+            } else if(getCookie('esaCookie')) {
+                usr.cookie = getCookie('esaCookie');
+            }
+        if(document.refer) usr.refer = document.refer;
+
+        var result = {};
+        if (query_string.s) { result.s = query_string.s };
+
+        var data = JSON.parse(JSON.stringify(query_string));
+        var deletingKeys = ['','s', 's1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 'utm_source',
+            'utm_medium', 'utm_term', 'utm_content', 'utm_campaign', 'cpc', 'direct'];
+
+        for (index in data) {
+            for (delIndex in deletingKeys) {
+                if (deletingKeys[delIndex] == index) {
+                    delete data[index];
+                }
+            }
+        }
+
+        result.getData = "";
+
+        for (index in data) {
+            if(result.getData == "") {
+                result.getData = index + "=" + data[index]
+            } else {
+                result.getData = result.getData + "," + index + "=" + data[index];
+            }
+        }
+        for (index in usr) {
+            result[index] = usr[index];
+        }
+        for (index in sub) {
+            result[index] = sub[index];
+        }
+        for (index in utm) {
+            result[index] = utm[index];
+        }
+        result["lid"] = "QW8Q3496rn9drRptM";
+        return base64_encode(JSON.stringify(result));
+    }
+
+    function setCookie(name, value, options) {
+        options = options || {};
+
+        var expires = options.expires;
+
+        if (typeof expires == "number" && expires) {
+            var d = new Date();
+            d.setTime(d.getTime() + expires * 1000);
+            expires = options.expires = d;
+        }
+        if (expires && expires.toUTCString) {
+            options.expires = expires.toUTCString();
+        }
+
+        value = encodeURIComponent(value);
+
+        var updatedCookie = name + "=" + value;
+
+        for (var propName in options) {
+            updatedCookie += "; " + propName;
+            var propValue = options[propName];
+            if (propValue !== true) {
+                updatedCookie += "=" + propValue;
+            }
+        }
+
+        document.cookie = updatedCookie;
+    }
+
+    function getCookie(name) {
+        var matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    function base64_encode(data) {
+        var b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+        var o1, o2, o3, h1, h2, h3, h4, bits, i = 0, enc = '';
+        do {
+            o1 = data.charCodeAt(i++);
+            o2 = data.charCodeAt(i++);
+            o3 = data.charCodeAt(i++);
+            bits = o1 << 16 | o2 << 8 | o3;
+            h1 = bits >> 18 & 0x3f;
+            h2 = bits >> 12 & 0x3f;
+            h3 = bits >> 6 & 0x3f;
+            h4 = bits & 0x3f;
+            enc += b64.charAt(h1) + b64.charAt(h2) + b64.charAt(h3) + b64.charAt(h4);
+        } while (i < data.length);
+
+        switch (data.length % 3) {
+            case 1:
+                enc = enc.slice(0, -2) + '==';
+                break;
+            case 2:
+                enc = enc.slice(0, -1) + '=';
+                break;
+        }
+        return enc;
+    }
+
+    function sendData(data,reverse, tr) {
+        data = data.replace("+", "-");
+        data = data.replace("/", "_");
+
+        if (window.XMLHttpRequest) xmlHttp = new XMLHttpRequest();
+        else xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        if (tr === true)
+            url = "http://finan.so/direct/" + reverse + "?eString=" + data;
+        else
+            url = "http://finan.so/direct/" + reverse + "?eString=" + data;
+        xmlHttp.open("GET", url, false);
+        xmlHttp.send();
+        return JSON.parse(xmlHttp.responseText);
+    }
+
+})();    
+    </script>
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Critical CSS */
+    </style>
+  </head>
+
+  <body>
+    <!-- HTML5 -->
+    <header>
+      <h1>
+        Approved C2S Js Goal
+      </h1>
+      <nav>
+        <a
+          href="/"
+        >
+          Back
+        </a>
+      </nav>
+      <time></time>
+    </header>
+
+    <main>
+    </main>
+
+    <footer>
+      <p>
+      </p>
+    </footer>
+  </body>
+</html>

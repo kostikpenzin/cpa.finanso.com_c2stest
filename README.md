@@ -2,5 +2,4 @@
 
 Test the CPA C2S integration finanso.com
 
-- [Approve Js Goal](js.html)
-- [Approve Img Pixel Goal](js.html)
+- [Approved C2S Js Goal](js.html)
