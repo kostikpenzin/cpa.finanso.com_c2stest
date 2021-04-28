@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Test C2S integrated CPA finanso.com
 
 You can use the [editor on GitHub](https://github.com/kostikpenzin/cpa.finanso.pxltest/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
